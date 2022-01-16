@@ -7,60 +7,60 @@
   </div>
 
   <h2>Liste des assignments :</h2>
-  <div class="pagination">
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="premierePage()"
-      [disabled]="page === 1"
-    >
-      Première page
-    </button>
-    &nbsp;
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="pagePrecedente()"
-      [disabled]="!hasPrevPage"
-    >
-      Page précédente
-    </button>
-    &nbsp;
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="pageSuivante()"
-      [disabled]="!hasNextPage"
-    >
-      Page suivante
-    </button>
-    &nbsp;
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="dernierePage()"
-      [disabled]="page === totalPages"
-    >
-      Dernière page
-    </button>
-  </div>
-  <mat-list *ngFor="let assignment of assignments">
-    <nav>
-      <a routerLink="/assignment/{{ assignment.id }}">
-        <h3 mat-subheader>
-          Date de rendu : {{ assignment.dateDeRendu | date }}
-        </h3>
-        <mat-list-item>
-          <p *ngIf="assignment.rendu; else nonsoumis" appRendu>
-            {{ assignment.nom }} a été rendu par l'élève.
-          </p>
+  <mat-table [dataSource]="assignments" matSort>
 
-          <ng-template #nonsoumis>
-            <p>{{ assignment.nom }} non rendu.</p>
-          </ng-template>
-          <mat-divider></mat-divider>
-        </mat-list-item>
-      </a>
-    </nav>
-  </mat-list>
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.nom}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Date de Rendu </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.dateDeRendu  | date}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="rendu">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Rendu </mat-header-cell>
+      <mat-cell *matCellDef="let row" [style.color]= 'row.rendu ? "green" : "red"'> {{row.rendu}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+    class="element-row"
+    (click) = "rowClicked(row.id)">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+  <div class="pagination">
+    <button mat-stroked-button color="primary"
+            (click)="premierePage()"
+            [disabled]="page===1"
+    >Première page</button>
+    &nbsp;
+    <button mat-stroked-button color="primary"
+            (click)="pagePrecedente()"
+            [disabled]="!hasPrevPage"
+    >Page précédente</button>
+    &nbsp;
+    <button mat-stroked-button color="primary"
+            (click)="pageSuivante()"
+            [disabled]="!hasNextPage"
+            >Page suivante</button>
+    &nbsp;
+    <button mat-stroked-button color="primary"
+            (click)="dernierePage()"
+            [disabled]="page===totalPages"
+    >Dernière page</button>
+  </div>
 </main>

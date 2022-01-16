@@ -1,11 +1,5 @@
-.rendu {
-  color: green;
-}
-
-.nonRendu {
-  color: red;
-  background-color: yellow;
-  border: 3px dashed purple;
+.element-row:not(.expanded):hover {
+  background: #f5f5f5;
 }
 
 .important {

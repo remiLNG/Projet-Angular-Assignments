@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assignments',
@@ -9,7 +10,12 @@ import { Assignment } from './assignment.model';
 })
 export class AssignmentsComponent implements OnInit {
   ajoutActive = false;
+  displayedColumns = ['id', 'name', 'date', 'rendu'];
   assignments: Assignment[] = [];
+  rowClicked(element: any){
+    console.log(element);
+    this.router.navigate(['/assignment/', element]);
+  }
   // pour la pagination
   page: number = 1;
   limit: number = 10;
@@ -20,7 +26,7 @@ export class AssignmentsComponent implements OnInit {
   hasNextPage: boolean = false;
   nextPage: number = 0;
 
-  constructor(private assignmentService: AssignmentsService) {}
+  constructor(private assignmentService: AssignmentsService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAssignments();
