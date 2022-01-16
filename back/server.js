@@ -2,6 +2,7 @@ let express = require("express");
 let app = express();
 let bodyParser = require("body-parser");
 let assignment = require("./routes/assignments");
+const user = require("./routes/users");
 
 let mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
@@ -50,6 +51,8 @@ let port = process.env.PORT || 8010;
 // les routes
 const prefix = "/api";
 
+// Assignments routes
+
 app
   .route(prefix + "/assignments")
   .get(assignment.getAssignments)
@@ -60,6 +63,11 @@ app
   .route(prefix + "/assignments/:id")
   .get(assignment.getAssignment)
   .delete(assignment.deleteAssignment);
+
+// User routes
+app.route(prefix + "/users").get(user.getUsers);
+
+app.route(prefix + "/users/findUser").post(user.findUser);
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");

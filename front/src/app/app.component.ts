@@ -9,7 +9,7 @@ import { AuthService } from './shared/auth.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Application de gestion des assignments';
+  title = 'Assignments';
 
   constructor(
     private authService: AuthService,
@@ -17,15 +17,19 @@ export class AppComponent {
     private assignmentsService: AssignmentsService
   ) {}
 
-  login() {
-    if (!this.authService.loggedIn) {
-      console.log("Je n'étais pas connecté, je suis maintenant loggé");
-      this.authService.logIn();
-    } else {
-      console.log("J'étais  connecté, je suis maintenant déloggé");
-      this.authService.logOut();
-      this.router.navigate(['/home']);
-    }
+  // login() {
+  //   if (!this.authService.loggedIn) {
+  //     console.log("Je n'étais pas connecté, je suis maintenant loggé");
+  //     this.authService.logIn();
+  //   } else {
+  //     console.log("J'étais  connecté, je suis maintenant déloggé");
+  //     this.authService.logOut();
+  //     this.router.navigate(['/home']);
+  //   }
+  // }
+
+  disconnect(){
+    this.router.navigate(['/'])
   }
 
   remplirBD() {

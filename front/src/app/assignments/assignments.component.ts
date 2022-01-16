@@ -41,6 +41,8 @@ export class AssignmentsComponent implements OnInit {
     });
   }
 
+  
+
   getColor(a: any) {
     return a.rendu ? 'green' : 'red';
   }

@@ -1,18 +1,14 @@
-<h1>
-  <nav>
-    <a routerLink="/home">
-      {{title}}
-    </a>
-  </nav>
-</h1>
+<div class="main container">
+  <mat-toolbar class="shadow-lg" color="primary">
+    <mat-toolbar-row>
+      <h1 [routerLink]="['/home']">{{ title }}</h1>
+      <span class="menu-spacer"></span>
+      <button mat-icon-button>
+        <mat-icon aria-hidden="false" (click)="disconnect()"> logout</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-<mat-slide-toggle (click)="login()">Login</mat-slide-toggle>
-<br>
-<button mat-raised-button
-        color="primary"
-        (click)="remplirBD()"
->
-        PEUPLER BD
-</button>
-
-<router-outlet></router-outlet>
+  <!-- router-outlet désigne le composant défini par le routeur -->
+  <router-outlet></router-outlet>
+</div>
