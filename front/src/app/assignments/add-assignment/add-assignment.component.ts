@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
-import { Assignment } from '../assignment.model';
+import { Assignment } from '../../models/assignment.model';
 
 @Component({
   selector: 'app-add-assignment',
@@ -14,10 +15,16 @@ export class AddAssignmentComponent implements OnInit {
   nomDevoir = "";
   dateDeRendu!:Date;
 
+
   constructor(private assignmentService:AssignmentsService,
     private router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  reset(): void{
+    this.nomDevoir = '';
+    // this.dateDeRendu = new Date();
   }
 
   onSubmit() {
@@ -26,6 +33,7 @@ export class AddAssignmentComponent implements OnInit {
 
     const newAssignment = new Assignment();
     newAssignment.id = Math.round(Math.random()*100000);
+
     newAssignment.nom = this.nomDevoir;
     newAssignment.dateDeRendu = this.dateDeRendu;
     newAssignment.rendu = false;
