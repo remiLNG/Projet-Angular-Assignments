@@ -13,7 +13,7 @@ export class AppComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
+    public router: Router,
     private assignmentsService: AssignmentsService
   ) {}
 
@@ -28,8 +28,8 @@ export class AppComponent {
   //   }
   // }
 
-  disconnect(){
-    this.router.navigate(['/'])
+  disconnect() {
+    this.router.navigate(['/']);
   }
 
   remplirBD() {

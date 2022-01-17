@@ -1,9 +1,10 @@
 <div class="main container">
   <mat-toolbar class="shadow-lg" color="primary">
     <mat-toolbar-row>
-      <h1 [routerLink]="['/home']">{{ title }}</h1>
+      <h1 *ngIf="router.url != '/'" [routerLink]="['/home']">{{ title }}</h1>
+      <h1 *ngIf="router.url == '/'">{{ title }}</h1>
       <span class="menu-spacer"></span>
-      <button mat-icon-button>
+      <button mat-icon-button *ngIf="router.url != '/'">
         <mat-icon aria-hidden="false" (click)="disconnect()"> logout</mat-icon>
       </button>
     </mat-toolbar-row>
