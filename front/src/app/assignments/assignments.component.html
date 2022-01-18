@@ -6,61 +6,102 @@
     </a>
   </div>
 
-  <h2>Liste des assignments :</h2>
-  <mat-table [dataSource]="assignments" matSort>
-
+  <div class="center">
+    <mat-card-title color="accent">Liste des assignments</mat-card-title>
+  </div>
+  <table mat-table [dataSource]="assignments" matSort>
     <!-- ID Column -->
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{ row.id }} </mat-cell>
     </ng-container>
 
     <!-- Progress Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.nom}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{ row.nom }} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="date">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Date de Rendu </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.dateDeRendu  | date}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Date de Rendu
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.dateDeRendu | date }} </mat-cell>
     </ng-container>
 
     <!-- Color Column -->
     <ng-container matColumnDef="rendu">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Rendu </mat-header-cell>
-      <mat-cell *matCellDef="let row" [style.color]= 'row.rendu ? "green" : "red"'> {{row.rendu}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Rendu
+      </mat-header-cell>
+      <mat-cell
+        *matCellDef="let row"
+        [style.color]="row.rendu ? 'green' : 'red'"
+      >
+        {{ row.rendu }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Edit
+      </mat-header-cell>
+      <mat-cell
+        *matCellDef="let row"
+        [style.color]="row.rendu ? 'green' : 'red'"
+      >
+        <button mat-icon-button color="primary" (click)="rowClicked(row.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"
-    class="element-row"
-    (click) = "rowClicked(row.id)">
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      class="element-row"
+    >
     </mat-row>
-  </mat-table>
+  </table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 
   <div class="pagination">
-    <button mat-stroked-button color="primary"
-            (click)="premierePage()"
-            [disabled]="page===1"
-    >Première page</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="premierePage()"
+      [disabled]="page === 1"
+    >
+      Première page
+    </button>
     &nbsp;
-    <button mat-stroked-button color="primary"
-            (click)="pagePrecedente()"
-            [disabled]="!hasPrevPage"
-    >Page précédente</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="pagePrecedente()"
+      [disabled]="!hasPrevPage"
+    >
+      Page précédente
+    </button>
     &nbsp;
-    <button mat-stroked-button color="primary"
-            (click)="pageSuivante()"
-            [disabled]="!hasNextPage"
-            >Page suivante</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="pageSuivante()"
+      [disabled]="!hasNextPage"
+    >
+      Page suivante
+    </button>
     &nbsp;
-    <button mat-stroked-button color="primary"
-            (click)="dernierePage()"
-            [disabled]="page===totalPages"
-    >Dernière page</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="dernierePage()"
+      [disabled]="page === totalPages"
+    >
+      Dernière page
+    </button>
   </div>
 </main>

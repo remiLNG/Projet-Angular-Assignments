@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AssignmentsComponent implements OnInit {
   ajoutActive = false;
-  displayedColumns = ['id', 'name', 'date', 'rendu'];
+  displayedColumns = ['id', 'name', 'date', 'rendu','edit'];
   assignments: Assignment[] = [];
   rowClicked(element: any){
     console.log(element);
