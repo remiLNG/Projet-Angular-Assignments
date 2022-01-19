@@ -10,12 +10,9 @@ import { Router } from '@angular/router';
 })
 export class AssignmentsComponent implements OnInit {
   ajoutActive = false;
-  displayedColumns = ['id', 'name', 'date', 'rendu','edit'];
+  displayedColumns = ['id', 'name', 'date', 'rendu','edit','delete'];
   assignments: Assignment[] = [];
-  rowClicked(element: any){
-    console.log(element);
-    this.router.navigate(['/assignment/', element]);
-  }
+
   // pour la pagination
   page: number = 1;
   limit: number = 10;
@@ -30,6 +27,9 @@ export class AssignmentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAssignments();
+  }
+  rowClicked(element: any){
+    this.router.navigate(['/assignment/', element]);
   }
 
   getAssignments() {
@@ -47,6 +47,16 @@ export class AssignmentsComponent implements OnInit {
     });
   }
 
+  DeleteAssignment(row: { _id: string | undefined; }) {
+    // TODO Open a dialog to confirm delete
+    const assignmentToDelete = this.assignments.filter(assignment => assignment._id === row._id)[0];
+      this.assignmentService.deleteAssignment(assignmentToDelete)
+      .subscribe(reponse => {
+        window.location.reload();
+
+      })
+    
+  }
   
 
   getColor(a: any) {

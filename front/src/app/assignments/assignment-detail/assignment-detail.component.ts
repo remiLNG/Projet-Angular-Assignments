@@ -53,21 +53,21 @@ export class AssignmentDetailComponent implements OnInit {
     }
   }
 
-  onDeleteAssignment() {
-    if(this.assignmentTransmis) {
-      this.assignmentService.deleteAssignment(this.assignmentTransmis)
-      .subscribe(reponse => {
-        console.log(reponse.message);
+  // onDeleteAssignment() {
+  //   if(this.assignmentTransmis) {
+  //     this.assignmentService.deleteAssignment(this.assignmentTransmis)
+  //     .subscribe(reponse => {
+  //       console.log(reponse.message);
 
-        // pour faire disparaitre la boite qui affiche le détail
-        this.assignmentTransmis = undefined;
+  //       // pour faire disparaitre la boite qui affiche le détail
+  //       this.assignmentTransmis = undefined;
 
-        // on affiche liste. Comme on est dans le subscribe, on est sur
-        // que les données sont à jour et que l'assignment a été supprimé !
-        this.router.navigate(["/home"]);
-      })
-    }
-  }
+  //       // on affiche liste. Comme on est dans le subscribe, on est sur
+  //       // que les données sont à jour et que l'assignment a été supprimé !
+  //       this.router.navigate(["/home"]);
+  //     })
+  //   }
+  // }
 
   onClickEdit() {
     // correspond à /assignment/1/edit?nom=Buffa&prenom=Michel#edit

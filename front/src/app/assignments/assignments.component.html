@@ -47,12 +47,20 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header>
         Edit
       </mat-header-cell>
-      <mat-cell
-        *matCellDef="let row"
-        [style.color]="row.rendu ? 'green' : 'red'"
-      >
+      <mat-cell *matCellDef="let row">
         <button mat-icon-button color="primary" (click)="rowClicked(row.id)">
           <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Delete
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button color="warn" (click)="DeleteAssignment(row)">
+          <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
