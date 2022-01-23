@@ -8,6 +8,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 
 import { Matiere } from '../models/matiere.model';
+import { MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-assignments',
@@ -32,10 +34,13 @@ export class AssignmentsComponent implements OnInit {
   hasNextPage: boolean = false;
   nextPage: number = 0;
 
+  deleteAssignmentDialogRef!: MatDialogRef<ConfirmationDialogComponent>;
+
+
   @ViewChild(MatSort) sort!: MatSort; 
   @ViewChild(MatPaginator) paginator!: MatPaginator; 
 
-  constructor(private assignmentService: AssignmentsService, private matiereService: MatiereService, private router: Router) {}
+  constructor(private assignmentService: AssignmentsService, private matiereService: MatiereService, private router: Router,  private dialog: MatDialog,) {}
 
   ngOnInit(): void {
     this.getMatieres();
@@ -82,15 +87,37 @@ export class AssignmentsComponent implements OnInit {
     });
   }
 
-  DeleteAssignment(row: { _id: string | undefined; }) {
-    // TODO Open a dialog to confirm delete
-    const assignmentToDelete = this.assignments.filter(assignment => assignment._id === row._id)[0];
-      this.assignmentService.deleteAssignment(assignmentToDelete)
-      .subscribe(reponse => {
-        window.location.reload();
+  // DeleteAssignment(row: { _id: string | undefined; }) {
+  //   // TODO Open a dialog to confirm delete
+  //   const assignmentToDelete = this.assignments.filter(assignment => assignment._id === row._id)[0];
+  //     this.assignmentService.deleteAssignment(assignmentToDelete)
+  //     .subscribe(reponse => {
+  //       window.location.reload();
 
-      })
-  }
+  //     })
+  // }
+
+    // Ouverture du dialog de confirmation pour supprimer un Assignment
+    DeleteAssignment(row: { _id: string | undefined; }): void{
+      this.deleteAssignmentDialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        data:
+          {
+            question: 'Voulez-vous supprimer cet assignment ?'
+          },
+      });
+  
+      this.deleteAssignmentDialogRef.afterClosed().subscribe(data => {
+        if (data === true){
+          const assignmentToDelete = this.listData.data.filter(assignment => assignment._id === row._id)[0];
+          this.assignmentService.deleteAssignment(assignmentToDelete)
+          .subscribe(reponse => {
+            window.location.reload();
+    
+          })
+        }
+      });
+    }
+  
   
   remplirBD(){
     //this.matiereService.peuplerBD();
