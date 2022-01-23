@@ -24,8 +24,9 @@ import { AddAssignmentComponent } from './assignments/add-assignment/add-assignm
 import { Routes, RouterModule } from '@angular/router';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
 import { AuthGuard } from './shared/auth.guard';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatSortModule} from '@angular/material/sort';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 
@@ -75,7 +76,7 @@ const routes:Routes = [
     MatNativeDateModule, MatListModule, MatCardModule,
     MatCheckboxModule, MatSlideToggleModule, HttpClientModule,
     RouterModule.forRoot(routes), MatTableModule, MatPaginatorModule,
-    MatToolbarModule
+    MatToolbarModule, MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

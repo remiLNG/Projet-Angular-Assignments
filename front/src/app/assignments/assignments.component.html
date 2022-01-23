@@ -80,7 +80,7 @@
         *matCellDef="let row"
         [style.color]="row.rendu ? 'green' : 'red'"
       >
-        {{ row.rendu }}
+        {{ row.rendu ? "Oui" : "Non" }}
       </mat-cell>
     </ng-container>
 
@@ -115,42 +115,4 @@
   </mat-table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-
-  <div class="pagination">
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="premierePage()"
-      [disabled]="page === 1"
-    >
-      Première page
-    </button>
-    &nbsp;
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="pagePrecedente()"
-      [disabled]="!hasPrevPage"
-    >
-      Page précédente
-    </button>
-    &nbsp;
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="pageSuivante()"
-      [disabled]="!hasNextPage"
-    >
-      Page suivante
-    </button>
-    &nbsp;
-    <button
-      mat-stroked-button
-      color="primary"
-      (click)="dernierePage()"
-      [disabled]="page === totalPages"
-    >
-      Dernière page
-    </button>
-  </div>
 </main>

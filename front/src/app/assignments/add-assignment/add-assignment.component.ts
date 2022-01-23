@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Matiere } from 'src/app/models/matiere.model';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
+import { MatiereService } from 'src/app/shared/matiere.service';
 import { Assignment } from '../../models/assignment.model';
 
 @Component({
@@ -13,13 +15,18 @@ export class AddAssignmentComponent implements OnInit {
 
   // associées au champs input du formulaire
   nomDevoir = "";
+  auteur = "";
+  matieres: Matiere[] = [];
   dateDeRendu!:Date;
+  matiereSelection: any;
 
-
-  constructor(private assignmentService:AssignmentsService,
+  constructor(private assignmentService:AssignmentsService, private matiereService: MatiereService,
     private router:Router) { }
 
   ngOnInit(): void {
+    this.matiereService.getMatieres().subscribe((matieres: Matiere[]) => {
+      this.matieres = matieres;
+    });
   }
 
   reset(): void{
@@ -44,5 +51,9 @@ export class AddAssignmentComponent implements OnInit {
       // maintenant il faut qu'on affiche la liste !!!
       this.router.navigate(["/home"]);
     });
+  }
+
+  changeMatiere(event:any){
+    this.matiereSelection = event.value;
   }
 }
