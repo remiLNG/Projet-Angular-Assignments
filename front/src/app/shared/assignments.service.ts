@@ -69,6 +69,8 @@ export class AssignmentsService {
           console.log(assignment.nom + " inséré dans la BD");
         });
       });
+
+      
     })
   }
 

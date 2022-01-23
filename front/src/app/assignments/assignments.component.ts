@@ -6,8 +6,6 @@ import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-
-
 export interface AssignmentRow{
   _id: string;
   subjectTitle: string;
@@ -15,6 +13,7 @@ export interface AssignmentRow{
   dateLimite: Date;
 }
 
+import { Matiere } from '../models/matiere.model';
 
 @Component({
   selector: 'app-assignments',
@@ -28,6 +27,7 @@ export class AssignmentsComponent implements OnInit {
   searchKey!: string
   listData!: MatTableDataSource<AssignmentRow>
   ELEMENT_DATA_ASSIGNMENT: AssignmentRow[] = [];
+  matieres: Matiere[] = [];
 
   // pour la pagination
   page: number = 1;
@@ -45,10 +45,18 @@ export class AssignmentsComponent implements OnInit {
   constructor(private assignmentService: AssignmentsService, private matiereService: MatiereService, private router: Router) {}
 
   ngOnInit(): void {
-      this.getAssignments()
+    this.getMatieres();
+    this.getAssignments();
   }
+
   rowClicked(element: any){
     this.router.navigate(['/assignment/', element]);
+  }
+
+  getMatieres(){
+    this.matiereService.getMatieres().subscribe((data) => {
+      this.matieres = data;
+    });
   }
 
   getAssignments() {
@@ -66,6 +74,18 @@ export class AssignmentsComponent implements OnInit {
       this.prevPage = data.prevPage;
       this.hasNextPage = data.hasNextPage;
       this.nextPage = data.nextPage;
+
+      this.assignments.forEach(assignment => {
+        let matierePrivateId = assignment.matiere;
+
+        this.matieres.forEach(matiere => {      
+          if (matiere._id == matierePrivateId.toString()) {
+            assignment.matiere = matiere;            
+          }
+        });
+
+        //console.log("Matiere: " + assignment.matiere);
+      });
     });
   }
 
