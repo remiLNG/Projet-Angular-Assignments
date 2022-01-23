@@ -1,6 +1,6 @@
 <main class="container">
   <div class="ajouterBtn">
-    <button mat-raised-button color="primary">PEUPLER BD</button>
+    <button mat-raised-button color="primary" (click)="remplirBD()">PEUPLER BD</button>
     <a routerLink="/add">
       <button mat-flat-button color="accent">Ajouter Assignment</button>
     </a>
@@ -16,13 +16,25 @@
       <mat-cell *matCellDef="let row"> {{ row.id }} </mat-cell>
     </ng-container>
 
-    <!-- Progress Column -->
+    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{ row.nom }} </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
+    <!-- Matiere Column -->
+    <ng-container matColumnDef="matiere">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Matiere </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.matiere }} </mat-cell>
+    </ng-container>
+
+    <!-- Auteur Column -->
+    <ng-container matColumnDef="auteur">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Auteur </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.auteur }} </mat-cell>
+    </ng-container>
+
+    <!-- Date Column -->
     <ng-container matColumnDef="date">
       <mat-header-cell *matHeaderCellDef mat-sort-header>
         Date de Rendu
@@ -30,7 +42,7 @@
       <mat-cell *matCellDef="let row"> {{ row.dateDeRendu | date }} </mat-cell>
     </ng-container>
 
-    <!-- Color Column -->
+    <!-- Rendu Column -->
     <ng-container matColumnDef="rendu">
       <mat-header-cell *matHeaderCellDef mat-sort-header>
         Rendu

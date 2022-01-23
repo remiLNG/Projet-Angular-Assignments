@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AssignmentsService } from '../shared/assignments.service';
+import { MatiereService } from '../shared/matiere.service';
 import { Assignment } from '../models/assignment.model';
 import { Router } from '@angular/router';
 
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AssignmentsComponent implements OnInit {
   ajoutActive = false;
-  displayedColumns = ['id', 'name', 'date', 'rendu','edit','delete'];
+  displayedColumns = ['id', 'name', 'matiere', 'auteur', 'date', 'rendu','edit','delete'];
   assignments: Assignment[] = [];
 
   // pour la pagination
@@ -23,7 +24,7 @@ export class AssignmentsComponent implements OnInit {
   hasNextPage: boolean = false;
   nextPage: number = 0;
 
-  constructor(private assignmentService: AssignmentsService, private router: Router) {}
+  constructor(private assignmentService: AssignmentsService, private matiereService: MatiereService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAssignments();
@@ -55,9 +56,12 @@ export class AssignmentsComponent implements OnInit {
         window.location.reload();
 
       })
-    
   }
   
+  remplirBD(){
+    //this.matiereService.peuplerBD();
+    this.assignmentService.peuplerBD();
+  }
 
   getColor(a: any) {
     return a.rendu ? 'green' : 'red';

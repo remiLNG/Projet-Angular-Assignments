@@ -1,17 +1,6 @@
 let Assignment = require('../model/assignment');
+let Matiere = require("./matiere");
 
-// Récupérer tous les assignments (GET)
-/*
-function getAssignments(req, res){
-    Assignment.find((err, assignments) => {
-        if(err){
-            res.send(err)
-        }
-
-        res.send(assignments);
-    });
-}
-*/
 // Récupérer tous les assignments (GET)
 function getAssignments(req, res) {
     var aggregateQuery = Assignment.aggregate();
@@ -42,8 +31,11 @@ function getAssignment(req, res){
 // Ajout d'un assignment (POST)
 function postAssignment(req, res){
     let assignment = new Assignment();
+
     assignment.id = req.body.id;
     assignment.nom = req.body.nom;
+    assignment.auteur = req.body.auteur;
+    assignment.matiere = req.body.matiere;
     assignment.dateDeRendu = req.body.dateDeRendu;
     assignment.rendu = req.body.rendu;
 

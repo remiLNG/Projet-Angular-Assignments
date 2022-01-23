@@ -1,7 +1,11 @@
+import { Matiere } from "./matiere.model";
+
 export class Assignment {
-  nom!:string;
-  dateDeRendu!:Date;
-  rendu!:boolean;
-  id?:number;
-  _id?:string;
+  id?: number;
+  _id?: string;
+  nom!: string;
+  auteur!: string;
+  matiere!: Matiere;
+  dateDeRendu!: Date;
+  rendu!: boolean;
 }

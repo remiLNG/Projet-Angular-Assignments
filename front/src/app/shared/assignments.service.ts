@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
 import { Assignment } from '../models/assignment.model';
 import { LoggingService } from './logging.service';
-import { bdInitialAssignments } from './data';
+import { bdInitialAssignments, bdInitialMatieres } from './data';
+import { Matiere } from '../models/matiere.model';
+import { MatiereService } from './matiere.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +14,12 @@ import { bdInitialAssignments } from './data';
 export class AssignmentsService {
   assignments:Assignment[] = [];
 
-  constructor(private loggingService:LoggingService,
+  constructor(private loggingService:LoggingService, private matiereService: MatiereService,
               private http:HttpClient) { }
 
   url = "http://localhost:8010/api/assignments";
 
   getAssignments():Observable<Assignment[]> {
-    // return of(this.assignments);
-
     return this.http.get<Assignment[]>(this.url);
   }
 
@@ -28,20 +28,11 @@ export class AssignmentsService {
   }
 
   getAssignment(id:number):Observable<Assignment|undefined> {
-    //let assignment = this.assignments.find(elem => elem.id === id);
-
-    //return of(assignment);
-
     return this.http.get<Assignment>(this.url + "/" + id);
   }
 
   addAssignment(assignment:Assignment):Observable<any>{
-    //this.assignments.push(assignment);
-
     this.loggingService.log(assignment.nom, "ajouté");
-
-    //return of(`Assignment ${assignment.nom} ajouté`);
-
     return this.http.post<Assignment>(this.url, assignment);
   }
 
@@ -55,29 +46,29 @@ export class AssignmentsService {
   }
 
   deleteAssignment(assignment:Assignment):Observable<any> {
-
-    //const pos = this.assignments.indexOf(assignment);
-    //this.assignments.splice(pos, 1);
-
-    //return of(`Assignment ${assignment.nom} supprimé`);
     return this.http.delete(this.url + "/" + assignment._id);
   }
 
-  // version naive qui ne renvoie rien
-  // on en peut pas savoir quand tous les add auront été faits
   peuplerBD() {
+    console.log("Peuplement de la bd");
+    
     bdInitialAssignments.forEach(assignment => {
-      const a = new Assignment();
+      this.matiereService.getMatiere(assignment.matiere).subscribe((matiere: Matiere) => {
+        const m = matiere;
 
-      a.nom = assignment.nom;
-      a.dateDeRendu = new Date(assignment.dateDeRendu);
-      a.rendu = assignment.rendu;
-      a.id = assignment.id;
+        const a = new Assignment();
+        a.id = assignment.id;
+        a.nom = assignment.nom;
+        a.auteur = assignment.auteur;
+        a.matiere = m;
+        a.dateDeRendu = new Date(assignment.dateDeRendu);
+        a.rendu = assignment.rendu;
 
-      this.addAssignment(a)
-      .subscribe(reponse => {
-        console.log(assignment.nom + " inséré dans la BD");
-      })
+        this.addAssignment(a)
+        .subscribe(reponse => {
+          console.log(assignment.nom + " inséré dans la BD");
+        });
+      });
     })
   }
 
@@ -97,5 +88,4 @@ export class AssignmentsService {
     });
     return forkJoin(appelsVersAddAssignment); // renvoie un seul Observable pour dire que c'est fini
   }
-
 }
