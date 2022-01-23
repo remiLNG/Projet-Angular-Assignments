@@ -25,6 +25,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
 import { AuthGuard } from './shared/auth.guard';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatSortModule} from '@angular/material/sort';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 
@@ -69,6 +70,7 @@ const routes:Routes = [
     MatToolbarModule,
     MatStepperModule,
     MatButtonModule, MatIconModule, MatDividerModule,
+    MatSortModule,
     FormsModule, MatInputModule, MatDatepickerModule,
     MatNativeDateModule, MatListModule, MatCardModule,
     MatCheckboxModule, MatSlideToggleModule, HttpClientModule,

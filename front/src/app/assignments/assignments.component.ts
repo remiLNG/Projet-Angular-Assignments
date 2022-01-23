@@ -1,8 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AssignmentsService } from '../shared/assignments.service';
 import { MatiereService } from '../shared/matiere.service';
 import { Assignment } from '../models/assignment.model';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+
+
+export interface AssignmentRow{
+  _id: string;
+  subjectTitle: string;
+  assignmentTitle: string;
+  dateLimite: Date;
+}
+
 
 @Component({
   selector: 'app-assignments',
@@ -13,6 +25,9 @@ export class AssignmentsComponent implements OnInit {
   ajoutActive = false;
   displayedColumns = ['id', 'name', 'matiere', 'auteur', 'date', 'rendu','edit','delete'];
   assignments: Assignment[] = [];
+  searchKey!: string
+  listData!: MatTableDataSource<AssignmentRow>
+  ELEMENT_DATA_ASSIGNMENT: AssignmentRow[] = [];
 
   // pour la pagination
   page: number = 1;
@@ -24,10 +39,13 @@ export class AssignmentsComponent implements OnInit {
   hasNextPage: boolean = false;
   nextPage: number = 0;
 
+  @ViewChild(MatSort) sort!: MatSort; 
+  @ViewChild(MatPaginator) paginator!: MatPaginator; 
+
   constructor(private assignmentService: AssignmentsService, private matiereService: MatiereService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getAssignments();
+      this.getAssignments()
   }
   rowClicked(element: any){
     this.router.navigate(['/assignment/', element]);
@@ -36,7 +54,10 @@ export class AssignmentsComponent implements OnInit {
   getAssignments() {
     this.assignmentService.getAssignmentsPagine(this.page, this.limit).subscribe((data) => {
       // le tableau des assignments est maintenant ici....
-      this.assignments = data.docs;
+      this.listData = new MatTableDataSource(data.docs);
+      this.listData.sort = this.sort;
+      this.listData.paginator = this.paginator;
+      
       this.page = data.page;
       this.limit = data.limit;
       this.totalDocs = data.totalDocs;
@@ -86,5 +107,14 @@ export class AssignmentsComponent implements OnInit {
   pageSuivante() {
       this.page = this.nextPage;
       this.getAssignments();
+  }
+
+  onSearchClear(){
+    this.searchKey = ''
+    this.applyFilter()
+  }
+
+  applyFilter(){
+    this.listData.filter = this.searchKey.trim().toLowerCase();
   }
 }

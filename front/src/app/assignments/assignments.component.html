@@ -1,15 +1,40 @@
 <main class="container">
-  <div class="ajouterBtn">
-    <button mat-raised-button color="primary" (click)="remplirBD()">PEUPLER BD</button>
-    <a routerLink="/add">
-      <button mat-flat-button color="accent">Ajouter Assignment</button>
-    </a>
-  </div>
-
   <div class="center">
     <mat-card-title color="accent">Liste des assignments</mat-card-title>
   </div>
-  <table mat-table [dataSource]="assignments" matSort>
+  <div class="ajouterBtn">
+    <button mat-raised-button color="primary" (click)="remplirBD()">
+      PEUPLER BD
+    </button>
+  </div>
+  <div class="search-div">
+    <a routerLink="/add">
+      <button mat-raised-button>
+        <mat-icon>add</mat-icon>
+        Add Assignment
+      </button>
+    </a>
+    <mat-form-field class="search-form-field" floatLabel="never">
+      <input
+        matInput
+        [(ngModel)]="searchKey"
+        placeholder="Search"
+        autocomplete="off"
+        (keyup)="applyFilter()"
+      />
+      <button
+        matt-button
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        *ngIf="searchKey"
+        (click)="onSearchClear()"
+      >
+        <mat-icon> close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <mat-table [dataSource]="listData" matSort>
     <!-- ID Column -->
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
@@ -24,13 +49,17 @@
 
     <!-- Matiere Column -->
     <ng-container matColumnDef="matiere">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Matiere </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Matiere
+      </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{ row.matiere }} </mat-cell>
     </ng-container>
 
     <!-- Auteur Column -->
     <ng-container matColumnDef="auteur">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Auteur </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Auteur
+      </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{ row.auteur }} </mat-cell>
     </ng-container>
 
@@ -83,7 +112,7 @@
       class="element-row"
     >
     </mat-row>
-  </table>
+  </mat-table>
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 
