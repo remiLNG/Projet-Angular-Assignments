@@ -6,12 +6,6 @@ import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-export interface AssignmentRow{
-  _id: string;
-  subjectTitle: string;
-  assignmentTitle: string;
-  dateLimite: Date;
-}
 
 import { Matiere } from '../models/matiere.model';
 
@@ -25,8 +19,7 @@ export class AssignmentsComponent implements OnInit {
   displayedColumns = ['id', 'name', 'matiere', 'auteur', 'date', 'rendu','edit','delete'];
   assignments: Assignment[] = [];
   searchKey!: string
-  listData!: MatTableDataSource<AssignmentRow>
-  ELEMENT_DATA_ASSIGNMENT: AssignmentRow[] = [];
+  listData!: MatTableDataSource<any>
   matieres: Matiere[] = [];
 
   // pour la pagination
@@ -73,14 +66,14 @@ export class AssignmentsComponent implements OnInit {
       this.hasPrevPage = data.hasPrevPage;
       this.prevPage = data.prevPage;
       this.hasNextPage = data.hasNextPage;
-      this.nextPage = data.nextPage;
+      this.nextPage = data.nextPage;        
 
-      this.assignments.forEach(assignment => {
-        let matierePrivateId = assignment.matiere;
-
+      this.listData.data.forEach(assignment => {
+        let matierePrivateId = assignment.matiere;        
+        
         this.matieres.forEach(matiere => {      
           if (matiere._id == matierePrivateId.toString()) {
-            assignment.matiere = matiere;            
+            assignment.matiere = matiere;                        
           }
         });
 
