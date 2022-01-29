@@ -18,7 +18,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 })
 export class AssignmentsComponent implements OnInit {
   ajoutActive = false;
-  displayedColumns = ['id', 'name', 'matiere', 'auteur', 'date', 'rendu','edit','delete'];
+  displayedColumns = ['id', 'name', 'matiere', 'auteur', 'date', 'remarque', 'rendu','edit','delete'];
   assignments: Assignment[] = [];
   searchKey!: string
   listData!: MatTableDataSource<any>

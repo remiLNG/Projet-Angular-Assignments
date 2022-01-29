@@ -62,6 +62,8 @@ export class AssignmentsService {
         a.auteur = assignment.auteur;
         a.matiere = m;
         a.dateDeRendu = new Date(assignment.dateDeRendu);
+        a.remarque = assignment.remarque;
+        a.note = assignment.note;
         a.rendu = assignment.rendu;
 
         this.addAssignment(a)

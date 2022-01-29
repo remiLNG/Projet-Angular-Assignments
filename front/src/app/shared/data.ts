@@ -7,16 +7,16 @@ const bdInitialMatieres = [
 ];
 
 const bdInitialAssignments = [
-  { id: 1, nom: 'Projet Angular', auteur: 'Remi Longin', matiere: 2, dateDeRendu: '2022-01-30', rendu: false },
-  { id: 2, nom: 'Projet Angular', auteur: 'Jean-Baptite Lognon', matiere: 2, dateDeRendu: '2022-01-30', rendu: false },
-  { id: 3, nom: 'Projet Angular', auteur: 'Valentin Bordy', matiere: 2, dateDeRendu: '2022-01-30', rendu: true },
-  { id: 4, nom: 'Projet Angular', auteur: 'Pierre Griseri', matiere: 2, dateDeRendu: '2022-01-30', rendu: true },
-  { id: 5, nom: 'Projet Angular', auteur: 'Raphael Bolier', matiere: 2, dateDeRendu: '2022-01-30', rendu: false },
-  { id: 6, nom: 'Entreprenariat', auteur: 'Remi Longin', matiere: 3, dateDeRendu: '2022-03-15', rendu: true },
-  { id: 7, nom: 'Entreprenariat', auteur: 'Jean-Baptite Lognon', matiere: 3, dateDeRendu: '2022-03-15', rendu: true },
-  { id: 8, nom: 'Entreprenariat', auteur: 'Valentin Bordy', matiere: 3, dateDeRendu: '2022-03-15', rendu: false },
-  { id: 9, nom: 'Entreprenariat', auteur: 'Pierre Griseri', matiere: 3, dateDeRendu: '2022-03-15', rendu: false },
-  { id: 10, nom: 'Entreprenariat', auteur: 'Raphael Bolier', matiere: 3, dateDeRendu: '2022-03-15', rendu: false },
+  { id: 1, nom: 'Projet Angular', auteur: 'Remi Longin', matiere: 2, dateDeRendu: '2022-01-30', remarque: '', note: undefined, rendu: false },
+  { id: 2, nom: 'Projet Angular', auteur: 'Jean-Baptite Lognon', matiere: 2, dateDeRendu: '2022-01-30', remarque: '', note: undefined, rendu: false },
+  { id: 3, nom: 'Projet Angular', auteur: 'Valentin Bordy', matiere: 2, dateDeRendu: '2022-01-30', remarque: 'Tres bon travail', note: undefined, rendu: true },
+  { id: 4, nom: 'Projet Angular', auteur: 'Pierre Griseri', matiere: 2, dateDeRendu: '2022-01-30', remarque: 'Bon travail', note: undefined, rendu: true },
+  { id: 5, nom: 'Projet Angular', auteur: 'Raphael Bolier', matiere: 2, dateDeRendu: '2022-01-30', remarque: '', note: undefined, rendu: false },
+  { id: 6, nom: 'Entreprenariat', auteur: 'Remi Longin', matiere: 3, dateDeRendu: '2022-03-15', remarque: 'Excellent', note: undefined, rendu: true },
+  { id: 7, nom: 'Entreprenariat', auteur: 'Jean-Baptite Lognon', matiere: 3, dateDeRendu: '2022-03-15', remarque: 'Excellent', note: undefined, rendu: true },
+  { id: 8, nom: 'Entreprenariat', auteur: 'Valentin Bordy', matiere: 3, dateDeRendu: '2022-03-15', remarque: '', note: undefined, rendu: false },
+  { id: 9, nom: 'Entreprenariat', auteur: 'Pierre Griseri', matiere: 3, dateDeRendu: '2022-03-15', remarque: '', note: undefined, rendu: false },
+  { id: 10, nom: 'Entreprenariat', auteur: 'Raphael Bolier', matiere: 3, dateDeRendu: '2022-03-15', remarque: '', note: undefined, rendu: false },
 ];
 
 export { bdInitialAssignments }

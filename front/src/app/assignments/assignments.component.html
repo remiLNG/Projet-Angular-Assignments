@@ -71,6 +71,14 @@
       <mat-cell *matCellDef="let row"> {{ row.dateDeRendu | date }} </mat-cell>
     </ng-container>
 
+    <!-- Reamarque Column -->
+    <ng-container matColumnDef="remarque">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Remarque
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.remarque }} </mat-cell>
+    </ng-container>
+
     <!-- Rendu Column -->
     <ng-container matColumnDef="rendu">
       <mat-header-cell *matHeaderCellDef mat-sort-header>

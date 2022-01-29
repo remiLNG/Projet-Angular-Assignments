@@ -1,3 +1,4 @@
+import { NodeCompatibleEventEmitter } from "rxjs/internal/observable/fromEvent";
 import { Matiere } from "./matiere.model";
 
 export class Assignment {
@@ -7,5 +8,7 @@ export class Assignment {
   auteur!: string;
   matiere!: Matiere;
   dateDeRendu!: Date;
+  remarque?: string;
+  note?: number;
   rendu!: boolean;
 }
