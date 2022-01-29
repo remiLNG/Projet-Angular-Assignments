@@ -32,7 +32,7 @@
       </div>
       <div class="info" *ngIf="assignmentTransmis.rendu">
         <dt class="col-sm-4">Note :</dt>
-        <dd class="col-sm-8">{{ assignmentTransmis.note }}</dd>
+        <dd class="col-sm-8">{{ (assignmentTransmis.note == undefined ? "Aucune note n'a encore été attribué" : assignmentTransmis.note) }}</dd>
       </div>
       <div class="info" *ngIf="assignmentTransmis.rendu">
         <dt class="col-sm-4">Remarque :</dt>

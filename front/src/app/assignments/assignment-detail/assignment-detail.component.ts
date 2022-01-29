@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Matiere } from 'src/app/models/matiere.model.js';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { AuthService } from 'src/app/shared/auth.service';
+import { MatiereService } from 'src/app/shared/matiere.service';
 import { Assignment } from '../../models/assignment.model';
 
 @Component({
@@ -12,17 +13,25 @@ import { Assignment } from '../../models/assignment.model';
   styleUrls: ['./assignment-detail.component.css']
 })
 export class AssignmentDetailComponent implements OnInit {
-  assignmentTransmis?:Assignment;
+  assignmentTransmis:any;
   matieres: Matiere[] = [];
 
   constructor(private assignmentService:AssignmentsService,
+              private matiereService: MatiereService,
               private route:ActivatedRoute,
               private router:Router,
               private authService:AuthService) { }
 
   ngOnInit(): void {
     console.log("DANS COMPOSANT DETAIL")
+    this.getMatieres();
     this.getAssignment();
+  }
+
+  getMatieres(){
+    this.matiereService.getMatieres().subscribe((data) => {
+      this.matieres = data;
+    });
   }
 
   getAssignment() {
@@ -37,7 +46,13 @@ export class AssignmentDetailComponent implements OnInit {
       // utilisée dans le template HTML
       this.assignmentTransmis = assignment;
 
-      
+      let matierePrivateId = this.assignmentTransmis.matiere; 
+
+      this.matieres.forEach(matiere => {      
+        if (matiere._id == matierePrivateId.toString()) {
+          this.assignmentTransmis.matiere = matiere;                        
+        }
+      });
     })
 
   }
