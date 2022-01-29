@@ -18,7 +18,7 @@ export class AddAssignmentComponent implements OnInit {
   auteur = "";
   matieres: Matiere[] = [];
   dateDeRendu!:Date;
-  matiereSelection: any;
+  matiereSelection!: Matiere;
 
   constructor(private assignmentService:AssignmentsService, private matiereService: MatiereService,
     private router:Router) { }
@@ -40,9 +40,12 @@ export class AddAssignmentComponent implements OnInit {
 
     const newAssignment = new Assignment();
     newAssignment.id = Math.round(Math.random()*100000);
-
     newAssignment.nom = this.nomDevoir;
+    newAssignment.auteur = "test"
+    newAssignment.matiere = this.matiereSelection;
     newAssignment.dateDeRendu = this.dateDeRendu;
+    newAssignment.remarque = "";
+    newAssignment.note = undefined;
     newAssignment.rendu = false;
 
     this.assignmentService.addAssignment(newAssignment)

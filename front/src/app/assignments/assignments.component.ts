@@ -26,7 +26,7 @@ export class AssignmentsComponent implements OnInit {
 
   // pour la pagination
   page: number = 1;
-  limit: number = 10;
+  limit: number = 100000000;
   totalDocs: number = 0;
   totalPages: number = 0;
   hasPrevPage: boolean = false;
@@ -126,27 +126,6 @@ export class AssignmentsComponent implements OnInit {
 
   getColor(a: any) {
     return a.rendu ? 'green' : 'red';
-  }
-
-  // pagination
-  premierePage() {
-    this.page = 1;
-    this.getAssignments();
-  }
-
-  dernierePage() {
-    this.page = this.totalPages;
-    this.getAssignments();
-  }
-
-  pagePrecedente() {
-      this.page = this.prevPage;
-      this.getAssignments();
-  }
-
-  pageSuivante() {
-      this.page = this.nextPage;
-      this.getAssignments();
   }
 
   onSearchClear(){
