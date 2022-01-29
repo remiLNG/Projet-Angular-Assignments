@@ -31,7 +31,7 @@ export class AddAssignmentComponent implements OnInit {
 
   reset(): void{
     this.nomDevoir = '';
-    // this.dateDeRendu = new Date();
+
   }
 
   onSubmit() {

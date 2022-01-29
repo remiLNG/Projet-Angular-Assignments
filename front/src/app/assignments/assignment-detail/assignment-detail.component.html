@@ -28,15 +28,39 @@
       </div>
       <div class="info">
         <dt class="col-sm-4">Rendu :</dt>
-        <dd class="col-sm-8">{{ assignmentTransmis.rendu }}</dd>
+        <dd class="col-sm-8">
+          {{ assignmentTransmis.rendu == true ? "Rendu" : "Non rendu" }}
+        </dd>
       </div>
       <div class="info" *ngIf="assignmentTransmis.rendu">
         <dt class="col-sm-4">Note :</dt>
-        <dd class="col-sm-8">{{ (assignmentTransmis.note == undefined ? "Aucune note n'a encore été attribué" : assignmentTransmis.note) }}</dd>
+        <dd
+          class="col-sm-8"
+          [ngStyle]="{
+            color: assignmentTransmis.note == undefined ? 'red' : 'black'
+          }"
+        >
+          {{
+            assignmentTransmis.note == undefined
+              ? "Aucune note n'a encore été attribuée"
+              : assignmentTransmis.note
+          }}
+        </dd>
       </div>
       <div class="info" *ngIf="assignmentTransmis.rendu">
         <dt class="col-sm-4">Remarque :</dt>
-        <dd class="col-sm-8">{{ assignmentTransmis.remarque }}</dd>
+        <dd
+          class="col-sm-8"
+          [ngStyle]="{
+            color: assignmentTransmis.remarque == '' ? 'red' : 'black'
+          }"
+        >
+          {{
+            assignmentTransmis.remarque == ""
+              ? "Aucune remarque n'a encore été attribuée"
+              : assignmentTransmis.remarque
+          }}
+        </dd>
       </div>
     </dl>
   </div>

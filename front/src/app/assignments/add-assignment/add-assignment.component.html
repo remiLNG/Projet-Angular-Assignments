@@ -6,9 +6,9 @@
     <mat-vertical-stepper [linear]="true" #stepper>
       <mat-step>
         <form>
-          <ng-template matStepLabel>Titre</ng-template>
+          <ng-template matStepLabel>Nom</ng-template>
           <div>
-            <label class="col-md-4">Titre :</label>
+            <label class="col-md-4">Nom :</label>
             <mat-form-field class="col-md-7 offset-md-1">
               <input
                 required
@@ -98,22 +98,52 @@
       <mat-step>
         <ng-template matStepLabel>Confirmation</ng-template>
         <dl
-          class="row"
-          *ngIf="this.nomDevoir != null && this.dateDeRendu != null"
+          *ngIf="
+            this.nomDevoir != null &&
+            this.matiereSelection != null &&
+            this.dateDeRendu != null
+          "
         >
-          <dt class="col-sm-4">Titre :</dt>
-
+          <dt class="col-sm-4">Nom :</dt>
           <dd class="col-sm-8">{{ this.nomDevoir }}</dd>
+          <dt class="col-sm-4">Matiere :</dt>
+          <dd class="col-sm-8">{{ this.matiereSelection.nom }}</dd>
+          <dd class="col-sm-8">
+            <div>
+              <picture>
+                <source
+                  media="(min-width:0px)"
+                  [srcset]="matiereSelection.professor_img"
+                />
+                <img
+                  mat-card-image
+                  src=""
+                  alt="Photo du Professeur"
+                  class="imageContainer"
+                />
+              </picture>
+            </div>
+          </dd>
           <dt class="col-sm-4">Date Limite :</dt>
           <dd class="col-sm-8">{{ this.dateDeRendu | date: "dd/MM/yyyy" }}</dd>
         </dl>
         <div>
-          <button mat-stroked-button color="primary" (click)="onSubmit()">
+          <button
+            mat-stroked-button
+            [disabled]="
+              this.nomDevoir == '' ||
+              this.matiereSelection == null ||
+              this.dateDeRendu == null
+            "
+            color="primary"
+            (click)="onSubmit()"
+          >
             Ajouter
           </button>
           <button
             mat-stroked-button
             color="warn"
+            [disabled]="this.nomDevoir == ''"
             (click)="stepper.reset(); reset()"
           >
             Reset
