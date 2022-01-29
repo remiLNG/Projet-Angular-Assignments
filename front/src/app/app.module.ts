@@ -27,8 +27,7 @@ import { AuthGuard } from './shared/auth.guard';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
-import {MatDialogModule} from '@angular/material/dialog';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
@@ -81,7 +80,7 @@ const routes:Routes = [
     MatNativeDateModule, MatListModule, MatCardModule,
     MatCheckboxModule, MatSlideToggleModule, HttpClientModule,
     RouterModule.forRoot(routes), MatTableModule, MatPaginatorModule,
-    MatToolbarModule, MatSelectModule
+    MatToolbarModule, MatSelectModule, MatCardModule
   ],
   entryComponents: [ConfirmationDialogComponent],
   providers: [],

@@ -71,12 +71,27 @@
       <mat-cell *matCellDef="let row"> {{ row.dateDeRendu | date }} </mat-cell>
     </ng-container>
 
-    <!-- Reamarque Column -->
+    <!-- Note Column -->
+    <ng-container matColumnDef="note">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Note
+      </mat-header-cell>
+      <mat-cell 
+        *matCellDef="let row"
+        [style.color]="row.note == undefined ? 'red' : 'black'"
+      > {{ (row.note == undefined ? "Aucune note" : row.note) }} </mat-cell>
+    </ng-container>
+
+    <!-- Reamarque Column --> 
     <ng-container matColumnDef="remarque">
       <mat-header-cell *matHeaderCellDef mat-sort-header>
         Remarque
       </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{ row.remarque }} </mat-cell>
+      <mat-cell 
+        *matCellDef="let row"
+        [style.color]="row.remarque == '' ? 'red' : 'black'"
+      > 
+        {{ (row.remarque == "" ? "Aucune remarque" : row.remarque) }} </mat-cell>
     </ng-container>
 
     <!-- Rendu Column -->
