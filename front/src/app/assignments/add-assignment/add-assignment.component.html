@@ -1,6 +1,6 @@
 <mat-card>
   <div class="center">
-    <mat-card-title color="accent">Ajouter un assignment</mat-card-title>
+    <mat-card-title>Ajouter un assignment</mat-card-title>
   </div>
   <div class="center offset-md-3 col-md-6 my-3 shadow-lg">
     <mat-vertical-stepper [linear]="true" #stepper>
@@ -33,9 +33,13 @@
               <mat-label>Matière :</mat-label>
             </div>
             <div class="col-md-7 offset-md-1 selectContainer">
-              <mat-select required (selectionChange)="changeMatiere($event)" placeholder="Sélectionner la matière...">
+              <mat-select
+                required
+                (selectionChange)="changeMatiere($event)"
+                placeholder="Sélectionner la matière..."
+              >
                 <mat-option *ngFor="let matiere of matieres" [value]="matiere">
-                  {{matiere.nom}}
+                  {{ matiere.nom }}
                 </mat-option>
               </mat-select>
             </div>
@@ -43,8 +47,16 @@
 
           <div *ngIf="matiereSelection != null">
             <picture>
-              <source media='(min-width:0px)' [srcset]="matiereSelection.professor_img">
-              <img mat-card-image src="" alt="Photo du Professeur" class="imageContainer">
+              <source
+                media="(min-width:0px)"
+                [srcset]="matiereSelection.professor_img"
+              />
+              <img
+                mat-card-image
+                src=""
+                alt="Photo du Professeur"
+                class="imageContainer"
+              />
             </picture>
 
             <div>
@@ -52,7 +64,6 @@
               <button mat-button matStepperNext>Suivant</button>
             </div>
           </div>
-
         </form>
       </mat-step>
       <mat-step>
@@ -83,7 +94,6 @@
           <button mat-button matStepperPrevious>Précédent</button>
           <button mat-button matStepperNext>Suivant</button>
         </div>
-
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Confirmation</ng-template>

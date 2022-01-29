@@ -1,5 +1,21 @@
-.bottom {
-  display:flex;
-  justify-content: space-between;
-  align-items: flex-end;
+.center {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  color: #FF4081;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+.col-sm-4 {
+  color: #3F51B5;
+  font-size: medium;
+}
+
+.col-sm-8 {
+  font-weight: 500;
 }

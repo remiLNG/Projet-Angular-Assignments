@@ -19,13 +19,6 @@ export class EditAssignmentComponent implements OnInit {
               private assignmentService:AssignmentsService) { }
 
   ngOnInit(): void {
-    // exemple de récupération de "query params" et "fragment"
-    // exemple d'URL : /assignment/1/edit?nom=Buffa&prenom=Michel#edit
-    console.log("QUERY PARAMS : ");
-    console.log(this.route.snapshot.queryParams);
-    console.log("FRAGMENT : ");
-    console.log(this.route.snapshot.fragment);
-
     this.getAssignment();
   }
 
@@ -44,6 +37,10 @@ export class EditAssignmentComponent implements OnInit {
     })
   }
 
+  onAssignmentRendu() {
+    this.assignment!.rendu = true;
+  }
+
   onSaveAssignment() {
     if (!this.assignment) return;
 
@@ -58,6 +55,7 @@ export class EditAssignmentComponent implements OnInit {
       .updateAssignment(this.assignment)
       .subscribe((reponse) => {
         console.log(reponse.message);
+        this.onAssignmentRendu()
 
         // navigation vers la home page
         this.router.navigate(['/home']);

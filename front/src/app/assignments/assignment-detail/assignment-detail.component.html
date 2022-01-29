@@ -1,36 +1,49 @@
 <mat-card *ngIf="assignmentTransmis">
-  <mat-card-title>{{ assignmentTransmis.nom }}</mat-card-title>
-  <mat-card-subtitle>{{
-    assignmentTransmis.dateDeRendu | date
-  }}</mat-card-subtitle>
-  <div class="bottom">
-    <mat-checkbox
-      *ngIf="!assignmentTransmis.rendu"
-      (click)="onAssignmentRendu()"
-    >
-      Rendu
-    </mat-checkbox>
-
-    <nav>
-      <!-- la route "relative" marche aussi car on est déjà dans /assignment/id
-            Le fait de naviguer vers ['edit'] rajoute edit à la fin -->
-      <!--<a [routerLink]="['edit']"> -->
-
-      <!-- ici exemple avec route absolue (commence par /) -->
-      <!--
-          <a [routerLink]="['/assignment', assignmentTransmis.id, 'edit']">
-          -->
-
-      <button
-        [disabled]="!isAdmin()"
-        mat-stroked-button
-        color="primary"
-        (click)="onClickEdit()"
-      >
-        EDIT
-      </button>
-      <!--
-      </a>
-    --></nav>
+  <div class="center">
+    <mat-card-title>Detail de l'assignment</mat-card-title>
   </div>
+  <div>
+    <dl>
+      <div class="info">
+        <dt class="col-sm-4">Nom :</dt>
+        <dd class="col-sm-8">{{ assignmentTransmis.nom }}</dd>
+      </div>
+      <div class="info">
+        <dt class="col-sm-4">Matiere :</dt>
+        <dd class="col-sm-8">{{ assignmentTransmis.matiere.nom }}</dd>
+      </div>
+      <div class="info">
+        <dt class="col-sm-4">Professeur :</dt>
+        <dd class="col-sm-8">
+          {{ assignmentTransmis.matiere.professor_name }}
+        </dd>
+      </div>
+      <div class="info">
+        <dt class="col-sm-4">Auteur :</dt>
+        <dd class="col-sm-8">{{ assignmentTransmis.auteur }}</dd>
+      </div>
+      <div class="info">
+        <dt class="col-sm-4">Date de Rendu :</dt>
+        <dd class="col-sm-8">{{ assignmentTransmis.dateDeRendu | date }}</dd>
+      </div>
+      <div class="info">
+        <dt class="col-sm-4">Rendu :</dt>
+        <dd class="col-sm-8">{{ assignmentTransmis.rendu }}</dd>
+      </div>
+      <div class="info" *ngIf="assignmentTransmis.rendu">
+        <dt class="col-sm-4">Note :</dt>
+        <dd class="col-sm-8">{{ assignmentTransmis.note }}</dd>
+      </div>
+      <div class="info" *ngIf="assignmentTransmis.rendu">
+        <dt class="col-sm-4">Remarque :</dt>
+        <dd class="col-sm-8">{{ assignmentTransmis.remarque }}</dd>
+      </div>
+    </dl>
+  </div>
+
+  <nav>
+    <button mat-stroked-button color="primary" (click)="onClickEdit()">
+      EDIT
+    </button>
+  </nav>
 </mat-card>

@@ -1,6 +1,7 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Matiere } from 'src/app/models/matiere.model.js';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Assignment } from '../../models/assignment.model';
@@ -12,6 +13,7 @@ import { Assignment } from '../../models/assignment.model';
 })
 export class AssignmentDetailComponent implements OnInit {
   assignmentTransmis?:Assignment;
+  matieres: Matiere[] = [];
 
   constructor(private assignmentService:AssignmentsService,
               private route:ActivatedRoute,
@@ -34,6 +36,8 @@ export class AssignmentDetailComponent implements OnInit {
       // on utilise this.assignmentTransmis puisque c'est la propriété
       // utilisée dans le template HTML
       this.assignmentTransmis = assignment;
+
+      
     })
 
   }
@@ -53,35 +57,12 @@ export class AssignmentDetailComponent implements OnInit {
     }
   }
 
-  // onDeleteAssignment() {
-  //   if(this.assignmentTransmis) {
-  //     this.assignmentService.deleteAssignment(this.assignmentTransmis)
-  //     .subscribe(reponse => {
-  //       console.log(reponse.message);
-
-  //       // pour faire disparaitre la boite qui affiche le détail
-  //       this.assignmentTransmis = undefined;
-
-  //       // on affiche liste. Comme on est dans le subscribe, on est sur
-  //       // que les données sont à jour et que l'assignment a été supprimé !
-  //       this.router.navigate(["/home"]);
-  //     })
-  //   }
-  // }
 
   onClickEdit() {
     // correspond à /assignment/1/edit?nom=Buffa&prenom=Michel#edit
-    this.router.navigate(['/assignment', this.assignmentTransmis?.id, 'edit'],
-                        {
-                          queryParams: {
-                            nom:'Buffa',
-                            prenom:'Michel'
-                        },
-                          fragment:'edit'
-                      });
+    this.router.navigate(['/assignment'+ '/' + this.assignmentTransmis?.id + '/edit'])
+                   
   }
 
-  isAdmin() {
-    return this.authService.loggedIn;
-  }
+ 
 }

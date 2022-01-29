@@ -1,6 +1,6 @@
 <main class="container">
   <div class="center">
-    <mat-card-title color="accent">Liste des assignments</mat-card-title>
+    <mat-card-title>Liste des assignments</mat-card-title>
   </div>
   <div class="ajouterBtn">
     <button mat-raised-button color="primary" (click)="remplirBD()">
@@ -92,22 +92,21 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="edit">
+    <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef mat-sort-header>
-        Edit
+        Actions
       </mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button mat-icon-button color="primary" (click)="rowClicked(row.id)">
+        <button mat-icon-button color="black" (click)="showDetail(row.id)">
+          <mat-icon>remove_red_eye</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="editAssignment(row.id)"
+        >
           <mat-icon>edit</mat-icon>
         </button>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="delete">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>
-        Delete
-      </mat-header-cell>
-      <mat-cell *matCellDef="let row">
         <button mat-icon-button color="warn" (click)="DeleteAssignment(row)">
           <mat-icon>delete</mat-icon>
         </button>

@@ -18,7 +18,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 })
 export class AssignmentsComponent implements OnInit {
   ajoutActive = false;
-  displayedColumns = ['id', 'name', 'matiere', 'auteur', 'date', 'remarque', 'rendu','edit','delete'];
+  displayedColumns = ['id', 'name', 'matiere', 'auteur', 'date', 'remarque', 'rendu','actions'];
   assignments: Assignment[] = [];
   searchKey!: string
   listData!: MatTableDataSource<any>
@@ -47,8 +47,12 @@ export class AssignmentsComponent implements OnInit {
     this.getAssignments();
   }
 
-  rowClicked(element: any){
+  showDetail(element: any){
     this.router.navigate(['/assignment/', element]);
+  }
+
+  editAssignment(element: any){
+    this.router.navigate(['/assignment'+ '/' + element + '/edit'])
   }
 
   getMatieres(){
@@ -87,15 +91,6 @@ export class AssignmentsComponent implements OnInit {
     });
   }
 
-  // DeleteAssignment(row: { _id: string | undefined; }) {
-  //   // TODO Open a dialog to confirm delete
-  //   const assignmentToDelete = this.assignments.filter(assignment => assignment._id === row._id)[0];
-  //     this.assignmentService.deleteAssignment(assignmentToDelete)
-  //     .subscribe(reponse => {
-  //       window.location.reload();
-
-  //     })
-  // }
 
     // Ouverture du dialog de confirmation pour supprimer un Assignment
     DeleteAssignment(row: { _id: string | undefined; }): void{
