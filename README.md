@@ -2,8 +2,14 @@
 
 ## Run
 
-cd back : npm i puis node server.js
-cd front : npm i puis npm run start ou ng serve
+- cd back : npm i puis node server.js
+- cd front : npm i puis npm run start ou ng serve
+
+## Login
+
+Username : admin
+Password: miage123
+
 
 ## Features
 
