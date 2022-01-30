@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../../models/assignment.model';
@@ -15,6 +16,7 @@ export class EditAssignmentComponent implements OnInit {
   dateDeRendu?:Date;
   noteAssignment?:number;
   remarqueAssignment?:string;
+  satusAssignment?:any;
   
   constructor(private route:ActivatedRoute,
               private router:Router,
@@ -38,8 +40,13 @@ export class EditAssignmentComponent implements OnInit {
       this.dateDeRendu = assignment?.dateDeRendu;
       this.noteAssignment = assignment?.note;
       this.remarqueAssignment = assignment?.remarque;
+      this.satusAssignment = assignment?.rendu;
     })
   }
+
+  onChangeStatus(ob: MatCheckboxChange) {
+    this.satusAssignment = ob.checked;
+ } 
 
   onAssignmentRendu() {
     this.assignment!.rendu = true;
@@ -67,6 +74,8 @@ export class EditAssignmentComponent implements OnInit {
     if(this.noteAssignment){
       this.assignment.note = this.noteAssignment;
     }
+
+    this.assignment.rendu = this.satusAssignment;
 
     this.assignmentService
       .updateAssignment(this.assignment)
