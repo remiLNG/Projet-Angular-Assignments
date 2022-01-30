@@ -4,3 +4,16 @@
   margin-top: 10px;
   color: #FF4081;
 }
+
+
+.center-stepper {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+
+}
+
+.col-md-4 {
+  font-size: medium;
+  color: #3F51B5;
+}

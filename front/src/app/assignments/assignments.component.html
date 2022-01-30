@@ -11,7 +11,7 @@
     <a routerLink="/add">
       <button mat-raised-button>
         <mat-icon>add</mat-icon>
-        Add Assignment
+        Ajouter Assignment
       </button>
     </a>
     <mat-form-field class="search-form-field" floatLabel="never">
@@ -76,22 +76,25 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header>
         Note
       </mat-header-cell>
-      <mat-cell 
+      <mat-cell
         *matCellDef="let row"
         [style.color]="row.note == undefined ? 'red' : 'black'"
-      > {{ (row.note == undefined ? "Aucune note" : row.note) }} </mat-cell>
+      >
+        {{ row.note == undefined ? "Aucune note" : row.note }}
+      </mat-cell>
     </ng-container>
 
-    <!-- Reamarque Column --> 
+    <!-- Reamarque Column -->
     <ng-container matColumnDef="remarque">
       <mat-header-cell *matHeaderCellDef mat-sort-header>
         Remarque
       </mat-header-cell>
-      <mat-cell 
+      <mat-cell
         *matCellDef="let row"
         [style.color]="row.remarque == '' ? 'red' : 'black'"
-      > 
-        {{ (row.remarque == "" ? "Aucune remarque" : row.remarque) }} </mat-cell>
+      >
+        {{ row.remarque == "" ? "Aucune remarque" : row.remarque }}
+      </mat-cell>
     </ng-container>
 
     <!-- Rendu Column -->
